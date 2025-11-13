@@ -86,7 +86,7 @@
         var circle = document.createElement('div');
         circle.style.position = 'absolute';
         // Правый верхний угол здания с небольшим отступом
-        circle.style.left = (cfg.x + cfg.w - CIRCLE_SIZE - CIRCLE_OFFSET - 5) + 'px';
+        circle.style.left = (cfg.x + cfg.w - CIRCLE_SIZE - CIRCLE_OFFSET - 10) + 'px';
         circle.style.top = (cfg.y + CIRCLE_OFFSET) + 'px';
         circle.style.width = CIRCLE_SIZE + 'px';
         circle.style.height = CIRCLE_SIZE + 'px';
@@ -146,7 +146,7 @@
         // Правый верхний угол здания (как в ensureCircle)
         var circleSize = CIRCLE_SIZE;
         var offset = CIRCLE_OFFSET;
-        var buildingRightX = cfg.x + cfg.w - circleSize - offset - 5;
+        var buildingRightX = cfg.x + cfg.w - circleSize - offset - 10;
         var buildingTopY = cfg.y + offset;
         // Применяем трансформацию карты: координаты относительно content, затем применяем transform
         // content имеет transform-origin: 0 0, поэтому координаты умножаются на scale и добавляется translate
