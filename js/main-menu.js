@@ -585,7 +585,7 @@
             if (buildingType === 'storage') {
                 leftOffset += 5;
             }
-            indicator.style.left = (centerX - indicatorWidth / 2 + leftOffset) + 'px';
+            indicator.style.left = (centerX - indicatorWidth / 2 + leftOffset - 5) + 'px';
             // Размещаем над зданием, но ниже (уменьшаем отступ от верха)
             const topOffset = 20; // отступ от верха здания (опускаем ниже)
             indicator.style.top = (zoneRect.top - indicatorHeight + topOffset) + 'px';
@@ -720,7 +720,7 @@
             if (buildingType === 'storage') {
                 leftOffset += 5;
             }
-            indicator.style.left = (centerX - indicatorWidth / 2 + leftOffset) + 'px';
+            indicator.style.left = (centerX - indicatorWidth / 2 + leftOffset - 5) + 'px';
             // Размещаем над зданием, но ниже (уменьшаем отступ от верха)
             const topOffset = 20; // отступ от верха здания (опускаем ниже)
             indicator.style.top = (zoneRect.top - indicatorHeight + topOffset) + 'px';

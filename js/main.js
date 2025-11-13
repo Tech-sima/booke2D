@@ -644,9 +644,9 @@ function initializeCirclePositions() {
         topWorld.project(camera);
         const sx = ( topWorld.x * 0.5 + 0.5) * window.innerWidth;
         const sy = ( -topWorld.y * 0.5 + 0.5) * window.innerHeight;
-        incomeProgress.style.left = (sx-35)+'px'; // ширина 70 => радиус 35
+        incomeProgress.style.left = (sx-35-5)+'px'; // ширина 70 => радиус 35
         incomeProgress.style.top  = (sy-85)+'px'; // подняли на 50px выше
-        incomeBank.style.left = (sx-35)+'px';
+        incomeBank.style.left = (sx-35-5)+'px';
         incomeBank.style.top  = (sy-160)+'px'; // ещё выше над прогрессом
     }
 
@@ -660,9 +660,9 @@ function initializeCirclePositions() {
         let sx2=(top2.x*0.5+0.5)*window.innerWidth;
         let sy2=(-top2.y*0.5+0.5)*window.innerHeight;
 
-        factoryProgressDiv.style.left=(sx2-35)+'px';
+        factoryProgressDiv.style.left=(sx2-35-5)+'px';
         factoryProgressDiv.style.top =(sy2-85)+'px';
-        factoryBankDiv.style.left=(sx2-35)+'px';
+        factoryBankDiv.style.left=(sx2-35-5)+'px';
         factoryBankDiv.style.top =(sy2-160)+'px';
     }
 
@@ -675,7 +675,7 @@ function initializeCirclePositions() {
         top3.project(camera);
         const sx3=(top3.x*0.5+0.5)*window.innerWidth;
         const sy3=(-top3.y*0.5+0.5)*window.innerHeight;
-        storageProgressDiv.style.left=(sx3-35)+'px';
+        storageProgressDiv.style.left=(sx3-35-5)+'px';
         storageProgressDiv.style.top =(sy3-85)+'px';
     }
 }
@@ -962,9 +962,9 @@ function animate() {
         topWorld.project(camera);
         const sx = ( topWorld.x * 0.5 + 0.5) * window.innerWidth;
         const sy = ( -topWorld.y * 0.5 + 0.5) * window.innerHeight;
-        incomeProgress.style.left = (sx-35)+'px'; // ширина 70 => радиус 35
+        incomeProgress.style.left = (sx-35-5)+'px'; // ширина 70 => радиус 35
         incomeProgress.style.top  = (sy-85)+'px'; // подняли на 50px выше
-        incomeBank.style.left = (sx-35)+'px';
+        incomeBank.style.left = (sx-35-5)+'px';
         incomeBank.style.top  = (sy-160)+'px'; // ещё выше над прогрессом
     }
 
@@ -978,9 +978,9 @@ function animate() {
         let sx2=(top2.x*0.5+0.5)*window.innerWidth;
         let sy2=(-top2.y*0.5+0.5)*window.innerHeight;
 
-        factoryProgressDiv.style.left=(sx2-35)+'px';
+        factoryProgressDiv.style.left=(sx2-35-5)+'px';
         factoryProgressDiv.style.top =(sy2-85)+'px';
-        factoryBankDiv.style.left=(sx2-35)+'px';
+        factoryBankDiv.style.left=(sx2-35-5)+'px';
         factoryBankDiv.style.top =(sy2-160)+'px';
     }
 
@@ -993,7 +993,7 @@ function animate() {
         top3.project(camera);
         const sx3=(top3.x*0.5+0.5)*window.innerWidth;
         const sy3=(-top3.y*0.5+0.5)*window.innerHeight;
-        storageProgressDiv.style.left=(sx3-35)+'px';
+        storageProgressDiv.style.left=(sx3-35-5)+'px';
         storageProgressDiv.style.top =(sy3-85)+'px';
         if(selling){
             const elapsed=Date.now()-saleStartTime;
