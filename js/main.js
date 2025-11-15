@@ -634,49 +634,48 @@ document.body.appendChild(incomeBank);
 
 // Функция для начального позиционирования кругов
 function initializeCirclePositions() {
-    // Позиционируем кружки над библиотекой
+    // Позиционируем кружки над библиотекой (центрируем по центру здания)
     const cube = scene.getObjectByName('library');
     if(cube){
-        // позиция вершины куба (верхний центр)
-        const topWorld = cube.position.clone();
-        const halfH = (cube.geometry.parameters.height * cube.scale.y) / 2;
-        topWorld.y += halfH;
-        topWorld.project(camera);
-        const sx = ( topWorld.x * 0.5 + 0.5) * window.innerWidth;
-        const sy = ( -topWorld.y * 0.5 + 0.5) * window.innerHeight;
-        incomeProgress.style.left = (sx-35-10)+'px'; // ширина 70 => радиус 35
-        incomeProgress.style.top  = (sy-85)+'px'; // подняли на 50px выше
-        incomeBank.style.left = (sx-35-10)+'px';
+        // позиция центра куба
+        const centerWorld = cube.position.clone();
+        centerWorld.project(camera);
+        const sx = ( centerWorld.x * 0.5 + 0.5) * window.innerWidth;
+        const sy = ( -centerWorld.y * 0.5 + 0.5) * window.innerHeight;
+        // Центрируем круг (ширина 70px => радиус 35px)
+        incomeProgress.style.left = (sx-35)+'px';
+        incomeProgress.style.top  = (sy-85)+'px'; // над центром здания
+        incomeBank.style.left = (sx-35)+'px';
         incomeBank.style.top  = (sy-160)+'px'; // ещё выше над прогрессом
     }
 
-    // Позиционируем кружки над заводом
+    // Позиционируем кружки над заводом (центрируем по центру здания)
     const factoryObjRef = scene.getObjectByName('factory');
     if(factoryObjRef && factoryProgressDiv && factoryBankDiv){
-        const top2=factoryObjRef.position.clone();
-        const halfH2=(factoryObjRef.geometry.parameters.height*factoryObjRef.scale.y)/2;
-        top2.y+=halfH2;
-        top2.project(camera);
-        let sx2=(top2.x*0.5+0.5)*window.innerWidth;
-        let sy2=(-top2.y*0.5+0.5)*window.innerHeight;
+        // позиция центра завода
+        const center2=factoryObjRef.position.clone();
+        center2.project(camera);
+        let sx2=(center2.x*0.5+0.5)*window.innerWidth;
+        let sy2=(-center2.y*0.5+0.5)*window.innerHeight;
 
-        factoryProgressDiv.style.left=(sx2-35-10)+'px';
-        factoryProgressDiv.style.top =(sy2-85)+'px';
-        factoryBankDiv.style.left=(sx2-35-10)+'px';
-        factoryBankDiv.style.top =(sy2-160)+'px';
+        // Центрируем круг (ширина 70px => радиус 35px)
+        factoryProgressDiv.style.left=(sx2-35)+'px';
+        factoryProgressDiv.style.top =(sy2-85)+'px'; // над центром завода
+        factoryBankDiv.style.left=(sx2-35)+'px';
+        factoryBankDiv.style.top =(sy2-160)+'px'; // ещё выше над прогрессом
     }
 
-    // Позиционируем кружок над хранилищем
+    // Позиционируем кружок над хранилищем (центрируем по центру здания)
     const storObj = scene.getObjectByName('storage');
     if(storObj && storageProgressDiv && storageProgressDiv.style.display!=='none'){
-        const top3=storObj.position.clone();
-        const halfH3=(storObj.geometry.parameters.height*storObj.scale.y)/2;
-        top3.y+=halfH3;
-        top3.project(camera);
-        const sx3=(top3.x*0.5+0.5)*window.innerWidth;
-        const sy3=(-top3.y*0.5+0.5)*window.innerHeight;
-        storageProgressDiv.style.left=(sx3-35-10)+'px';
-        storageProgressDiv.style.top =(sy3-85)+'px';
+        // позиция центра хранилища
+        const center3=storObj.position.clone();
+        center3.project(camera);
+        const sx3=(center3.x*0.5+0.5)*window.innerWidth;
+        const sy3=(-center3.y*0.5+0.5)*window.innerHeight;
+        // Центрируем круг (ширина 70px => радиус 35px)
+        storageProgressDiv.style.left=(sx3-35)+'px';
+        storageProgressDiv.style.top =(sy3-85)+'px'; // над центром хранилища
     }
 }
 
@@ -952,49 +951,32 @@ function animate() {
         }
     }
 
-    // позиционируем кружки над кубом
+    // позиционируем кружки над кубом (центрируем по центру здания)
     const cube = scene.getObjectByName('library');
     if(cube){
-        // позиция вершины куба (верхний центр)
-        const topWorld = cube.position.clone();
-        const halfH = (cube.geometry.parameters.height * cube.scale.y) / 2;
-        topWorld.y += halfH;
-        topWorld.project(camera);
-        const sx = ( topWorld.x * 0.5 + 0.5) * window.innerWidth;
-        const sy = ( -topWorld.y * 0.5 + 0.5) * window.innerHeight;
-        incomeProgress.style.left = (sx-35-10)+'px'; // ширина 70 => радиус 35
-        incomeProgress.style.top  = (sy-85)+'px'; // подняли на 50px выше
-        incomeBank.style.left = (sx-35-10)+'px';
+        // позиция центра куба
+        const centerWorld = cube.position.clone();
+        centerWorld.project(camera);
+        const sx = ( centerWorld.x * 0.5 + 0.5) * window.innerWidth;
+        const sy = ( -centerWorld.y * 0.5 + 0.5) * window.innerHeight;
+        // Центрируем круг (ширина 70px => радиус 35px)
+        incomeProgress.style.left = (sx-35)+'px';
+        incomeProgress.style.top  = (sy-85)+'px'; // над центром здания
+        incomeBank.style.left = (sx-35)+'px';
         incomeBank.style.top  = (sy-160)+'px'; // ещё выше над прогрессом
     }
 
-    // позиционируем кружки над заводом
-    const factoryObjRef = scene.getObjectByName('factory');
-    if(factoryObjRef && factoryProgressDiv && factoryBankDiv){
-        const top2=factoryObjRef.position.clone();
-        const halfH2=(factoryObjRef.geometry.parameters.height*factoryObjRef.scale.y)/2;
-        top2.y+=halfH2;
-        top2.project(camera);
-        let sx2=(top2.x*0.5+0.5)*window.innerWidth;
-        let sy2=(-top2.y*0.5+0.5)*window.innerHeight;
-
-        factoryProgressDiv.style.left=(sx2-35-10)+'px';
-        factoryProgressDiv.style.top =(sy2-85)+'px';
-        factoryBankDiv.style.left=(sx2-35-10)+'px';
-        factoryBankDiv.style.top =(sy2-160)+'px';
-    }
-
-    // позиционируем кружок над хранилищем
+    // позиционируем кружок над хранилищем (центрируем по центру здания)
     const storObj = scene.getObjectByName('storage');
     if(storObj && storageProgressDiv && storageProgressDiv.style.display!=='none'){
-        const top3=storObj.position.clone();
-        const halfH3=(storObj.geometry.parameters.height*storObj.scale.y)/2;
-        top3.y+=halfH3;
-        top3.project(camera);
-        const sx3=(top3.x*0.5+0.5)*window.innerWidth;
-        const sy3=(-top3.y*0.5+0.5)*window.innerHeight;
-        storageProgressDiv.style.left=(sx3-35-10)+'px';
-        storageProgressDiv.style.top =(sy3-85)+'px';
+        // позиция центра хранилища
+        const center3=storObj.position.clone();
+        center3.project(camera);
+        const sx3=(center3.x*0.5+0.5)*window.innerWidth;
+        const sy3=(-center3.y*0.5+0.5)*window.innerHeight;
+        // Центрируем круг (ширина 70px => радиус 35px)
+        storageProgressDiv.style.left=(sx3-35)+'px';
+        storageProgressDiv.style.top =(sy3-85)+'px'; // над центром хранилища
         if(selling){
             const elapsed=Date.now()-saleStartTime;
             let deg=0;

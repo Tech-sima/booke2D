@@ -202,6 +202,14 @@
         }
     };
     
+    // Синхронизация со старой системой для завода
+    if (localStorage.getItem('factoryBuilt') === '1' && !buildingsData.factory.isOwned) {
+        buildingsData.factory.isOwned = true;
+        buildingsData.factory.lastCollectTime = Date.now();
+        buildingsData.factory.accumulatedProfit = 0;
+        saveBuildingsData();
+    }
+    
     // Функция сохранения данных
     function saveBuildingsData() {
         localStorage.setItem('buildingsData', JSON.stringify(buildingsData));
@@ -548,10 +556,20 @@
             const profitLabel = document.createElement('div');
             profitLabel.className = 'profit-amount-label';
             profitLabel.id = `profit-amount-${buildingType}`;
-            profitLabel.innerHTML = '0 <img src="assets/svg/money-icon.svg" style="width:10px;height:10px;vertical-align:middle;margin-left:2px;" alt="money">';
+            profitLabel.innerHTML = '0 <img src="assets/svg/money-icon.svg" style="width:16px;height:16px;vertical-align:middle;margin-left:2px;" alt="money">';
             
-            indicator.appendChild(circleWrapper);
-            indicator.appendChild(profitLabel);
+            // Для завода меняем порядок: сначала метка прибыли (сверху), потом круг (снизу)
+            if (buildingType === 'factory') {
+                indicator.appendChild(profitLabel);
+                indicator.appendChild(circleWrapper);
+                // Меняем направление flex для завода, чтобы метка была выше круга
+                indicator.style.display = 'flex';
+                indicator.style.flexDirection = 'column-reverse';
+                indicator.style.alignItems = 'center';
+            } else {
+                indicator.appendChild(circleWrapper);
+                indicator.appendChild(profitLabel);
+            }
             
             // Добавляем обработчик клика на круг для сбора прибыли
             circleWrapper.addEventListener('click', () => {
@@ -573,7 +591,7 @@
                 }
             });
             
-            // Позиционируем индикатор по центру сверху здания
+            // Позиционируем индикатор по центру сверху здания (или снизу для factory)
             indicator.style.position = 'fixed';
             // Высота индикатора: круг (48px) + метка прибыли (~20px)
             const indicatorHeight = 48 + 20; // круг + метка
@@ -586,9 +604,17 @@
                 leftOffset += 5;
             }
             indicator.style.left = (centerX - indicatorWidth / 2 + leftOffset - 10) + 'px';
-            // Размещаем над зданием, но ниже (уменьшаем отступ от верха)
-            const topOffset = 20; // отступ от верха здания (опускаем ниже)
-            indicator.style.top = (zoneRect.top - indicatorHeight + topOffset) + 'px';
+            
+            // Для завода размещаем снизу здания, для остальных - сверху
+            if (buildingType === 'factory') {
+                // Размещаем под зданием
+                const topOffset = 30; // отступ от низа здания (сдвинуто вниз на 10px)
+                indicator.style.top = (zoneRect.bottom + topOffset) + 'px';
+            } else {
+                // Размещаем над зданием, но ниже (уменьшаем отступ от верха)
+                const topOffset = 20; // отступ от верха здания (опускаем ниже)
+                indicator.style.top = (zoneRect.top - indicatorHeight + topOffset) + 'px';
+            }
             indicator.style.zIndex = '1000';
             
             document.body.appendChild(indicator);
@@ -646,7 +672,7 @@
                         } else {
                             formattedProfit = accumulatedProfit.toString();
                         }
-                        s.profitLabelEl.innerHTML = formattedProfit + ' <img src="assets/svg/money-icon.svg" style="width:10px;height:10px;vertical-align:middle;margin-left:2px;" alt="money">';
+                        s.profitLabelEl.innerHTML = formattedProfit + ' <img src="assets/svg/money-icon.svg" style="width:16px;height:16px;vertical-align:middle;margin-left:2px;" alt="money">';
                     }
                 });
                 window._profitRingRAF = requestAnimationFrame(animateRings);
@@ -721,9 +747,17 @@
                 leftOffset += 5;
             }
             indicator.style.left = (centerX - indicatorWidth / 2 + leftOffset - 10) + 'px';
-            // Размещаем над зданием, но ниже (уменьшаем отступ от верха)
-            const topOffset = 20; // отступ от верха здания (опускаем ниже)
-            indicator.style.top = (zoneRect.top - indicatorHeight + topOffset) + 'px';
+            
+            // Для завода размещаем снизу здания, для остальных - сверху
+            if (buildingType === 'factory') {
+                // Размещаем под зданием
+                const topOffset = 30; // отступ от низа здания (сдвинуто вниз на 10px)
+                indicator.style.top = (zoneRect.bottom + topOffset) + 'px';
+            } else {
+                // Размещаем над зданием, но ниже (уменьшаем отступ от верха)
+                const topOffset = 20; // отступ от верха здания (опускаем ниже)
+                indicator.style.top = (zoneRect.top - indicatorHeight + topOffset) + 'px';
+            }
             // Убираем right, так как теперь используем left
             indicator.style.right = 'auto';
         });
